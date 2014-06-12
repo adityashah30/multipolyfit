@@ -49,4 +49,7 @@ public class LinearRegression {
         return new SimpleMatrix(y);
     }
 
+    public SimpleMatrix getCoefficients() {
+        return theta;
+    }
 }

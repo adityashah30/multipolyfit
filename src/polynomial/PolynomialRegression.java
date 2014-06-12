@@ -99,6 +99,10 @@ public class PolynomialRegression {
         return new FitData(theta, degree);
     }
 
+    public FitData getCoefficients() {
+        return new FitData(theta, finaldegree);
+    }
+
     public SimpleMatrix predict(double[][] x) {
         return predict(x, theta);
     }

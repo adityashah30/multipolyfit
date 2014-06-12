@@ -57,6 +57,7 @@ public class PolynomialRegression {
     public FitData fit() {
         if (degree2 == 0) {
             FitData fitData = fit(degree1);
+            finaldegree = degree1;
             theta = fitData.getTheta();
             return fitData;
         } else {
@@ -103,15 +104,12 @@ public class PolynomialRegression {
     }
 
     private SimpleMatrix predict(double[][] x, SimpleMatrix theta) {
-        if (theta == null) {
-            fit();
-        }
         double[][] y = new double[x.length][1];
         for (int i = 0; i < x.length; i++) {
             y[i][0] = 0;
             for (int j = 0; j < x[0].length; j++) {
-                for (int deg = 0; deg < degree1; deg++) {
-                    y[i][0] += (Math.pow(x[i][j], deg + 1) * theta.get(j * degree1 + deg + 1, 0));
+                for (int deg = 0; deg < finaldegree; deg++) {
+                    y[i][0] += (Math.pow(x[i][j], deg + 1) * theta.get(j * finaldegree + deg + 1, 0));
                 }
             }
             y[i][0] += theta.get(0, 0);
@@ -120,9 +118,6 @@ public class PolynomialRegression {
     }
 
     private SimpleMatrix predict(double[][] x, SimpleMatrix theta, int degree1) {
-        if (theta == null) {
-            fit();
-        }
         double[][] y = new double[x.length][1];
         for (int i = 0; i < x.length; i++) {
             y[i][0] = 0;
@@ -137,15 +132,12 @@ public class PolynomialRegression {
     }
 
     private SimpleMatrix predict(SimpleMatrix x, SimpleMatrix theta) {
-        if (theta == null) {
-            fit();
-        }
         double[][] y = new double[x.numRows()][1];
         for (int i = 0; i < x.numRows(); i++) {
             y[i][0] = 0;
             for (int j = 0; j < x.numCols(); j++) {
-                for (int deg = 0; deg < degree1; deg++) {
-                    y[i][0] += (Math.pow(x.get(i, j), deg + 1) * theta.get(j * degree1 + deg + 1, 0));
+                for (int deg = 0; deg < finaldegree; deg++) {
+                    y[i][0] += (Math.pow(x.get(i, j), deg + 1) * theta.get(j * finaldegree + deg + 1, 0));
                 }
             }
             y[i][0] += theta.get(0, 0);
@@ -154,9 +146,6 @@ public class PolynomialRegression {
     }
 
     private SimpleMatrix predict(SimpleMatrix x, SimpleMatrix theta, int degree1) {
-        if (theta == null) {
-            fit();
-        }
         double[][] y = new double[x.numRows()][1];
         for (int i = 0; i < x.numRows(); i++) {
             y[i][0] = 0;
